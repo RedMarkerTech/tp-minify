@@ -5,19 +5,16 @@
  * @category Module
  * @package  TpMinify
  * @author   Kanstantsin A Kamkou (2ka.by)
- * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @license  http://opensource.org/licenses/bsd-license.php  New BSD License
  * @link     http://github.com/kkamkou/tp-minify/
  */
 
 namespace TpMinify\Controller;
-
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Stdlib\DispatchableInterface;
 use Zend\Stdlib\ResponseInterface;
 use Zend\Stdlib\RequestInterface;
 use Zend\Http\Headers;
-
 use Minify;
 
 /**
@@ -26,34 +23,8 @@ use Minify;
  * @see DispatchableInterface
  * @see ServiceLocatorAwareInterface
  */
-class Index implements DispatchableInterface, ServiceLocatorAwareInterface
+class Index extends AbstractActionController implements DispatchableInterface
 {
-    /**
-     * @var ServiceLocatorInterface
-     */
-    protected $serviceLocator;
-
-    /**
-     * Set serviceManager instance
-     *
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return void
-     */
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-    }
-
-    /**
-     * Retrieve serviceManager instance
-     *
-     * @return ServiceLocatorInterface
-     */
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
-    }
-
     /**
      * Execute the request
      *
@@ -65,6 +36,7 @@ class Index implements DispatchableInterface, ServiceLocatorAwareInterface
     {
         // the config hash
         $config = $this->getServiceLocator()->get('Config');
+        //$config = $this->getServiceLocator()->get('Config');
         $config = $config['TpMinify'];
 
         // some important stuff
